@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Addressbook {
     public static final int Add_details = 1;
+    public static final int Edit_Details=2;
     //Scanner is used to get the data from user
     Scanner user = new Scanner(System.in);
 //Declaring Variables
@@ -38,6 +39,10 @@ public class Addressbook {
         return ("FIRST NAME : " +First_Name+ "\nLAST NAME : " +Last_Name+ "\nAddress : "+Address+"\nCity : "+City+"\nState : "+State+
                 "\nZipcode : "+Zipcode+"\nPhone number : "+PhoneNumber+"Email Id : "+Email_Id);
     }
+    public String getName() {
+
+        return First_Name;
+    }
     public static void main(String[] args ){
         System.out.println("Welome to Address book");
         Scanner input = new Scanner(System.in);
@@ -47,15 +52,33 @@ public class Addressbook {
 //asking a user to add details or not
         int choice=input.nextInt();
         if (choice == Add_details) {
-
             int user_choice = input.nextInt();
             for (int i = 0; i < user_choice; i++) {
-              //creating an object and adding given details into user data list
+                //creating an object and adding given details into user data list
                 Addressbook Person = new Addressbook();
                 Person.set_contact_details();
                 user_data.add(Person);
                 System.out.println(Person.toString());
             }
+        }
+        System.out.println("What Next Do You Want To Choose \n2.Edit Person Details\n3.Exit");
+        int choice2 = input.nextInt();
+        if (choice2 == Edit_Details) {
+            System.out.println(user_data);//if user want to edit the added details
+            System.out.println("Which Person Details You Want To Edit");
+            String store = input.next();
+            for (Addressbook i : user_data) {
+
+                if (i.getName().equals(store)) {
+
+                    //int temporary = users.indexOf(i);
+                    System.out.println("Change The City :");
+                    i.City = input.next();
+
+                }
+
+            }
+            System.out.println(user_data);
         }
     }
 }
